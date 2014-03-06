@@ -1,8 +1,7 @@
-Welcome to your Appcelerator Titanium Mobile Project
+#[Sequence Diagram](https://www.dropbox.com/s/b75id517rk7pf9w/IMG_0201.JPG)
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
 
+#[Flowchart](https://www.dropbox.com/s/knv8mxqdzjskz71/IMG_0200.JPG)
 
 
 ----------------------------------
