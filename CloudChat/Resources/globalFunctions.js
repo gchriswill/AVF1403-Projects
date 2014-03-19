@@ -2,7 +2,7 @@ function tableMaker(passedObjects){
     
     //Creating search bar for table
     var searchBar = Titanium.UI.createSearchBar({
-        hintText: "Search Restaurants!",
+        hintText: "Search Employees",
         showCancel:false,
         top:0
             

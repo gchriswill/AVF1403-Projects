@@ -29,7 +29,7 @@ function daBa (passedObjects){
         
             // while ( TableRows.isValidRow() ){
 //                     
-                // Ti.API.info( "Synced on Database: rowid field--->" + TableRows.fieldByName("rowid") + " email field---> " + TableRows.fieldByName("email") + " username field---> " + TableRows.fieldByName("username") + " role field---> " + TableRows.fieldByName("role") + " name field---> " + TableRows.fieldByName("name") + " lastname field---> " + TableRows.fieldByName("lastname") + " age field---> " + TableRows.fieldByName("age") );
+                // Ti.API.info( "Synced Cloud Database to Local Storage: rowid field--->" + TableRows.fieldByName("rowid") + " email field---> " + TableRows.fieldByName("email") + " username field---> " + TableRows.fieldByName("username") + " role field---> " + TableRows.fieldByName("role") + " name field---> " + TableRows.fieldByName("name") + " lastname field---> " + TableRows.fieldByName("lastname") + " age field---> " + TableRows.fieldByName("age") );
 //             
                 // TableRows.next();
             // };

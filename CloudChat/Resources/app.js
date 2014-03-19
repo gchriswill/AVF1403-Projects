@@ -5,7 +5,7 @@ function cloudRequest (){
     
     Cloud.Users.query({ 
         page: 1,
-        per_page: 10,
+        per_page: 100,
         
         }, function(e){
         
@@ -305,7 +305,7 @@ logingLabel.addEventListener("click", function(){
                     });
                     
                     var userNameLabel = Ti.UI.createLabel({
-                        text: e.source.userUsername +"\n"+ e.source.userEmail
+                        text: "Employee: " + e.source.userUsername
                     });
                     userView.add(userNameLabel);
                     userView.open({modal: true});
@@ -316,8 +316,9 @@ logingLabel.addEventListener("click", function(){
                         };
                     });
                 });
-                
+                chatTableWindow.add(extractingTableReady);
                 chatTableWindow.open({animated: true});
+            
             
             };
                  
@@ -559,6 +560,7 @@ creatingLabel.addEventListener("click", function(){
                     var userNameLabel = Ti.UI.createLabel({
                         text: e.source.userUsername
                     });
+                    
                     userView.add(userNameLabel);
                     userView.open({modal: true});
                     
@@ -615,7 +617,7 @@ creatingLabel.addEventListener("click", function(){
                         };
                     });
                 });
-                
+                chatTableWindow.add(extractingTableReady);
                 chatTableWindow.open({animated: true});
             
             };
