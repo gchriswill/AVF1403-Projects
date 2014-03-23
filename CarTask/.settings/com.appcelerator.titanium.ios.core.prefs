@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=CarTask
+iosLaunchConfigurationAttributes/appid=com.fullsail.demoApp
+iosLaunchConfigurationAttributes/certificate=Jennifer McCarrick (VET4496F2Z)
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/sdk_version=7.1
+iosLaunchConfigurationAttributes/uuid=2B549F4C-09FF-42C6-B0D7-0D6558026493
+provisioning_profiles/development/2B549F4C-09FF-42C6-B0D7-0D6558026493/appid=com.fullsail.demoApp
+provisioning_profiles/development/2B549F4C-09FF-42C6-B0D7-0D6558026493/name=demoApp
+provisioning_profiles/development/2B549F4C-09FF-42C6-B0D7-0D6558026493/uuid=2B549F4C-09FF-42C6-B0D7-0D6558026493

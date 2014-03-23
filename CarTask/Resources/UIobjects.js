@@ -6,7 +6,7 @@ UI.lanWin = {
 };
 
 UI.loPi = {
-    bottom: 0,
+    top: 0,
     image: "CarLogo.png",
     backgroundColor: "#333",
     height: 315,
@@ -14,26 +14,21 @@ UI.loPi = {
 };
 
 UI.loTe = {
+    top: 0,
     color: "#fff",
-    text: "Login",
-    font: { fontSize: 24, fontFamily: "Helvetica Neue" },
+    text: "Account \n Login",
+    font: { fontSize: 36, fontFamily: "Helvetica Neue" },
     textAlign: "center",
 };
 
 
 
 UI.creAccLa = {
-    bottom: 200,
-    color: "#333",
-    backgroundColor: "#fff",
+    top: 0,
+    color: "#fff",
     text: "Create \n account",
-    font: { fontSize: 20, fontFamily: "Helvetica Neue" },
+    font: { fontSize: 36, fontFamily: "Helvetica Neue" },
     textAlign: "center",
-    width: "150",
-    height: "150",
-    borderRadius: 75,
-    borderColor: "#333",
-    borderWidth: "2"
 };
 
 UI.aboLa = {
@@ -48,49 +43,39 @@ UI.aboLa = {
     height: "25"
 };
 
-UI.settings = {
-    //image: "settingsButton.png",
-    bottom: 35,
-    right: 35,
-    width: "25",
-    height: "25"
-};
-
 UI.logWin = {
     backgroundColor: "#fff",
     title: "Create Account",
-    bottom: 75,
-    width: 400,
-    height: 600,
+    width: "50%",
+    height: "60%",
     scrollable: true
 };
 
 UI.close ={
-    bottom: 20,
-    left: 20,
-    color: "#fff",
-    backgroundColor: "#333",
+    bottom: 40,
+    left: 40,
+    color: "#333",
     text: "Cancel",
-    font: { fontSize: 14, fontFamily: "Helvetica Neue" },
+    font: { fontSize: 24, fontFamily: "Helvetica Neue" },
     textAlign: "center",
-    width: "60",
-    height: "30"
+    width: "auto",
+    height: "auto"
 };
 
 UI.loginUser = {
-    bottom: 20,
-    right: 20,
-    color: "#fff",
-    backgroundColor: "#333",
+    bottom: 40,
+    right: 40,
+    color: "#333",
     text: "Login",
-    font: { fontSize: 14, fontFamily: "Helvetica Neue" },
+    font: { fontSize: 24, fontFamily: "Helvetica Neue" },
     textAlign: "center",
-    width: "60",
-    height: "30"
+    width: "auto",
+    height: "auto"
+    
 };
 
 UI.scrolw1 = {
-    top:0,
+    top: 100,
     width: 200
 };
 
@@ -136,7 +121,7 @@ UI.passF = {
 };
 
 UI.uPi = {
-    top: 240,
+    top: 20,
     image: "userPic.png",
     width: "auto",
     height: "auto"
