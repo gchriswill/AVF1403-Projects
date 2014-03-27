@@ -1,12 +1,13 @@
 Titanium.UI.setBackgroundColor("#cecece");
 Ti.include("UIobjects.js");
-Ti.include("appBehavior.js");
 
 function cloudNetworkCheck (e){
     
+    // Native Feature!!!===========================================
+    // Network Detection
     if (Ti.Network.getOnline() == false) { 
         
-        alert("No network conection! Offline mode enabled... \n " + e.message);  
+        alert(e.message + ", \n or there's network conection! \n OFFLINE mode enabled...");  
         
     }else{
         
@@ -18,16 +19,17 @@ function cloudNetworkCheck (e){
     };
 };
 
-(function cloudRequest (){
+function cloudRequest (){
     var Cloud = require("ti.cloud");
     Cloud.Users.query({ page: 1, per_page: 100 }, cloudNetworkCheck);
-})();
+};
+cloudRequest();
 
 var landingWindow        = Ti.UI.createWindow(UI.lanWin);
 landingWindow.orientationModes = [ Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT, Ti.UI.PORTRAIT ];
 
 var menubarView          = Ti.UI.createView({top: 0, height: 315, backgroundColor: "#fff" });
-var logoTextBranding     = Ti.UI.createLabel({left: 90, top: 235, color: "#333", text: "Welcome to CarTask", font: { fontSize: 62, fontFamily: "Helvetica Neue" }, textAlign: "center"});
+var logoTextBranding     = Ti.UI.createLabel({ top: 235, color: "#333", text: "Welcome to CarTask", font: { fontSize: 62, fontFamily: "Helvetica Neue" }, textAlign: "center"});
 
 var logoPic              = Ti.UI.createImageView(UI.loPi);
 var keysview             = Ti.UI.createImageView({ image: "keys.png", bottom: 0});
@@ -43,13 +45,15 @@ landingWindow.add(accView);
 
 landingWindow.add(menubarView);
 
+// Native Feature!!!===========================================
+// Platform type detection!!!!
 if ( Ti.Platform.osname !== "ipad"){
     
     landingWindow.orientationModes = [ Ti.UI.PORTRAIT ];
-    
-    logView.setRight("200px");
-    accView.setRight("200px");
-    accView.setBottom("50px");
+    logoTextBranding.setText("CarTask");
+    logView.setRight(null);
+    accView.setRight(null);
+    accView.setBottom("100px");
     
     menubarView.setBackgroundColor("transparent");
 
@@ -61,6 +65,8 @@ if ( Ti.Platform.osname !== "ipad"){
     var browseFoward = Ti.UI.createLabel({ left: 100, bottom: 30, color: "#333", text: "Forward ☞", font: { fontSize: 16, fontFamily: "Helvetica Neue" }, textAlign: "center"});
     var twitterView  = Ti.UI.createWebView({ url: "twitterFile.html", height: 550, width: 500, left: 10, top: 420, backgroundColor: "transparent", opacity: 0.0 });
     
+    // Native Feature!!!===========================================
+    // Network Detection
     if (Ti.Network.getOnline() == false) {
         twitterView.url  = "null";
         var offlineLabel = Ti.UI.createLabel({color: "#333", text: "Sorry, there's no network!", font: { fontSize: 24, fontFamily: "Helvetica Neue" }, textAlign: "center"});
@@ -105,9 +111,13 @@ if ( Ti.Platform.osname !== "ipad"){
             opacity:  1, 
             duration: 2000
     });
-
+    
+    // Native Feature!!!===========================================
+    // Device Orientation detection!!!!
     Ti.Gesture.addEventListener("orientationchange", function(e){
         
+        // Native Feature!!!===========================================
+        // Device Orientation detection!!!! 
         if ( e.source.orientation == 3 ||  e.source.orientation == 4){
             logoTextBranding.setLeft(null);
             browseBack.setLeft(285);
@@ -115,7 +125,6 @@ if ( Ti.Platform.osname !== "ipad"){
             backText.setLeft(630);
             twitterText.setLeft(null);
             twitterView.setLeft(null);
-            //twitterView.setOpacity(0.0);
             twitterView.setHeight(300);
             twitterView.setTop(375);
             
@@ -136,7 +145,6 @@ if ( Ti.Platform.osname !== "ipad"){
             browseFoward.setLeft(100);
             backText.setLeft(360);
             twitterText.setLeft(60);
-            //twitterView.setOpacity(0.0);
             twitterView.setLeft(10);
             twitterView.setHeight(550);
             twitterView.setTop(420);
@@ -177,16 +185,17 @@ logView.addEventListener("click", function(){
     var passwordLabel   = Ti.UI.createLabel(UI.passL);
     var passwordField   = Ti.UI.createTextField(UI.passF);
     
-    
+    // Native Feature!!!===========================================
+    // Platform type detection!!!!
     if ( Ti.Platform.osname == "android") { loginWindow.setHeight("auto"); loginWindow.setWidth("auto"); }
     
     function closingModal(){
-        
-        closeButton.setBorderColor("#333");
         logText.color = "#fff";
         loginWindow.close({modal: true});
     };
     
+    // Native Feature!!!===========================================
+    //Touch swipe detection!!!
     function closingModalWithSwipe(e){
         if (e.direction == "down") { loginWindow.close({modal: true});  logText.setColor("#fff"); loginUserButton.setBorderColor("transparent"); };
     };
@@ -211,92 +220,10 @@ logView.addEventListener("click", function(){
         }else{           
         
             var gettingCloudLogin = require("cloudScripts/userLogin");
+            var testclose = gettingCloudLogin.userAccountLoginFunction([ userNameValue, passwordValue, true ]);
             
-            loginUserButton.setBorderColor("#333");
-            gettingCloudLogin.userAccountLoginFunction([userNameValue, passwordValue]);
-            loginWindow.close({modal: true});
-            
-            var carStatusWindow = Ti.UI.createWindow({
-                backgroundColor: "#fff",
-                title: null
-            });
-            
-            var requiringTable        = require("globalFunctions");
-            var requiringDBextraction = require("SQLiteScripts/localStorage");
-            
-            var objectExtractect      = requiringDBextraction.runnignDB([ 2, ["dummy"] ]);
-            var extractingTableReady  = requiringTable.tableFactory([objectExtractect, true]);
-            
-            // if (Ti.Platform.osname == "ipad"){
-//                 
-                // extractingTableReady.addEventListener("click", function(e){
-//                     
-                    // var userView = Ti.UI.createWindow({
-                        // backgroundColor: "#fff",
-                        // width: 300,
-                        // height: 300,
-                        // borderRadius: 50
-                    // });
-//                     
-                    // var userNameLabel = Ti.UI.createLabel({
-                        // text: e.source.userUsername
-                    // });
-                    // userView.add(userNameLabel);
-                    // userView.open({modal: true});
-//                     
-                    // userView.addEventListener("swipe", function(e){
-                        // if (e.direction == "down") {
-                            // userView.close({modal: true});
-                        // };
-                    // });
-                // });
-//             
-                // carStatusWindow.add(extractingTableReady);
-//                 
-                // var chatSplitWindow = Ti.UI.iPad.createSplitWindow({
-                    // detailView: testWindow,
-                    // masterView: carStatusWindow,
-                    // showMasterInPortrait: true
-                // });
-//                 
-                // testWindow.addEventListener("swipe", function(e){
-                    // if (e.direction == "right") {
-                         // chatSplitWindow.showMasterInPortrait = true;
-                    // }else if (e.direction == "left"){
-                        // chatSplitWindow.showMasterInPortrait = false;
-                    // };
-//                     
-                // });
-//                 
-                // chatSplitWindow.open({ animated: true });
-//                 
-             // }else{
-//                 
-                // extractingTableReady.addEventListener("click", function(e){
-//                     
-                    // var userView = Ti.UI.createWindow({
-                        // backgroundColor: "#fff",
-                        // width: 200,
-                        // height: 200,
-                        // borderRadius: 50
-                    // });
-//                     
-                    // var userNameLabel = Ti.UI.createLabel({
-                        // text: "Employee: " + e.source.userUsername
-                    // });
-                    // userView.add(userNameLabel);
-                    // userView.open({modal: true});
-//                     
-                    // userView.addEventListener("swipe", function(e){
-                        // if (e.direction == "down") {
-                            // userView.close({modal: true});
-                        // };
-                    // });
-                // });
-                // carStatusWindow.add(extractingTableReady);
-                // carStatusWindow.open({animated: true});
-            // };
-        };
+            closingModal();
+       };
     };
     
     loginWindow.addEventListener("swipe", closingModalWithSwipe);
@@ -334,6 +261,7 @@ accView.addEventListener("click", function(){
     var confirmField          = Ti.UI.createTextField(UI.passF);
     
     userFancyIcon.setImage("userPic2.png");
+    usernameField.setPasswordMask(false);
     passwordField.setTop("290");
     createLabel.setText("Create");
     confirmField.setTop("350");
@@ -345,16 +273,11 @@ accView.addEventListener("click", function(){
     
     function closingModal2(){
         
-        closeButton.setBorderColor("#333");
         creatingAccountLabel.setColor("#fff");
         creatingAccountWindow.close({modal: true});
     };
     
-    creatingAccountWindow.addEventListener("swipe", closingModalWithSwipe);
-    
-    closeButton.addEventListener("click", closingModal2);
-    
-    createLabel.addEventListener("click", function(){
+    function creatingAccountSuccess(){
         
         var emailValue = emailField.getValue();
         var userNameValue = usernameField.getValue();
@@ -391,48 +314,16 @@ accView.addEventListener("click", function(){
         }else{           
         
             var requiringCloudCreate = require("cloudScripts/createAccount");
+            requiringCloudCreate.creatingUserFunction([ emailValue, userNameValue, passwordValue, confirmValue, false ]);
             
-            createLabel.setBackgroundColor("#333");
-            createLabel.setColor("#fff");
-            createLabel.setBorderColor("#fff");
-            
-            requiringCloudCreate.creatingUserFunction([ emailValue, userNameValue, passwordValue, confirmValue]);
-            
-            creatingAccountLabel.setBackgroundColor("#fff");
-            creatingAccountWindow.close({modal: true});
-            
-            var testWindow = Ti.UI.createWindow({ backgroundColor: "#333", title: null });
-            
-            var carStatusWindow = Ti.UI.createWindow({ backgroundColor: "#fff", title: null });
-            
-            var requiringTable = require("globalFunctions");
-            var requiringDBextraction = require("SQLiteScripts/localStorage");
-            var objectExtractect = requiringDBextraction.runnignDB([ 2, ["dummy" ] ]);
-            var extractingTableReady = requiringTable.tableFactory([objectExtractect, true]);
-            
-            extractingTableReady.addEventListener("click", function(e){
-                
-                var userView = Ti.UI.createWindow({ backgroundColor: "#fff", width: 200, height: 200, borderRadius: 50 });
-                
-                if (Ti.Platform.osname == "ipad") userView.setWidth("300"); userView.setHeight("300");
-                
-                var userNameLabel = Ti.UI.createLabel({
-                    text: e.source.userUsername
-                });
-                userView.add(userNameLabel);
-                userView.open({modal: true});
-                
-                userView.addEventListener("swipe", function(e){
-                    if (e.direction == "down") userView.close({modal: true});
-                    
-                });
-            });
-            
-            carStatusWindow.add(extractingTableReady);
-            carStatusWindow.open({animated: true});
-        };//End of condition
-        
-    });
+            cloudRequest();
+            closingModal2();
+        };//End of condition        
+    };
+    
+    creatingAccountWindow.addEventListener("swipe", closingModalWithSwipe);
+    closeButton.addEventListener("click", closingModal2);
+    createLabel.addEventListener("click", creatingAccountSuccess);
     
     creatingAccountWindow.add(closeButton);
     creatingAccountWindow.add(createLabel);

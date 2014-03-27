@@ -36,7 +36,7 @@ function daBa (passedObjects){
         
             while ( TableRows.isValidRow() ){
                     
-                Ti.API.info( "Synced Cloud Database to Local Storage: @--- rowid field---> \"" + TableRows.fieldByName("rowid") + "\" @--- email field ---> \"" + TableRows.fieldByName("email") + "\" @--- username field---> \"" + TableRows.fieldByName("username") +"\"" );
+                Ti.API.info( "Synced Cloud Database to Local Storage: @--- rowid field---> \"" + TableRows.fieldByName("rowid") + "\" @--- email field ---> \"" + TableRows.fieldByName("email") + "\" @--- username field---> \"" +TableRows.fieldByName("username") +"\"" );
             
                 TableRows.next();
             };
@@ -45,13 +45,16 @@ function daBa (passedObjects){
             break;
         
         case 2:
-            var TableRows2 = dbase.execute("SELECT * FROM carprofile");
             
+            var TableRows2 = dbase.execute("SELECT * FROM carprofile WHERE username=\"" + passedObjects[2] + "\"");
             var uniMultiObject = [];
-                while (TableRows2.isValidRow()){
-                                        
-                    uniMultiObject.push({ 
-                        custom_fields: { 
+            
+            if(TableRows2.fieldByName("username") == passedObjects[2] && TableRows2.fieldByName("password") == passedObjects[3]){
+                
+                uniMultiObject.push({ 
+                    
+                    custom_fields: { 
+                        
                         "user_rowid" : TableRows2.fieldByName("rowid"),
                         "user_email": TableRows2.fieldByName("email"),
                         "user_password": TableRows2.fieldByName("password"),
@@ -62,14 +65,18 @@ function daBa (passedObjects){
                         "user_tiredateset": TableRows2.fieldByName("tiredateset"), 
                         "user_enginedateset": TableRows2.fieldByName("enginedateset"), 
                         "user_fueldateset": TableRows2.fieldByName("fueldateset"), 
-                        "user_fulltuneupdateset": TableRows2.fieldByName("fulltuneupdateset") }, 
-                        username: TableRows2.fieldByName("username"), 
-                    });
+                        "user_fulltuneupdateset": TableRows2.fieldByName("fulltuneupdateset") 
+                    }, 
                     
-                    TableRows2.next();
-                };
+                    username: TableRows2.fieldByName("username")
+                
+                });
+
+            }else{
+                uniMultiObject.push(null);
+                alert("Incorrect User or Password");
+            };
             return uniMultiObject;
-            
             TableRows2.close();
             
             break;
